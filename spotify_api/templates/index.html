@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+{% endblock %}
+
+{% block body %}
+
+  <div class="top">
+		<p>
+		<a href="https://open.spotify.com/user/yub9xyg7b4zztflpdk52tqzsb"><img src="https://i.scdn.co/image/ab6775700000ee85f3182bf7999bbfcf5bb0b509" alt="USER IMAGE" id='usrr'></a>
+		  <br>
+		  <br>
+		  PROFILE
+		  <br>
+		  <span style="font-size:60px; font-weight: bold; color: white;">zodiac</span> 
+		  <br>
+		  4 Public Playlists <span>&#8226;</span> 1 Follwer <span>&#8226;</span> 9 Following
+		  <br>
+		  Last online : {% print(res['items'][0]['played_at'][11:16])  %},
+		  {% print(res['items'][0]['played_at'][:10]) %} 
+		  <br>
+		  <br>
+		 
+		</p>
+  </div>
+
+
+<br><br>
+<br><br>
+  <span id="textt">Songs played recently</span>
+  <br><br>
+  <div id="table">
+  <table id="table1">
+	<colgroup>
+		<col span="1" style="width: 20%;">
+		<col span="1" style="width: 20%;">
+		<col span="1" style="width: 15%;">
+		<col span="1" style="width: 10%;">
+		<col span="1" style="width: 20%;">
+		<col span="1" style="width: 15%;">
+	 </colgroup>
+	 <tbody>
+	<tr id="table_first">
+		<th>Song</th>
+		<th>Album</th>
+		<th>Artist</th>
+		<th>Length</th>
+		<th>Played at</th>
+		<th></th>
+	</tr>
+	{% for song in res['items']: %}
+	<tr>
+	 <td width:50%><a href="{{song['track']['external_urls']['spotify']}}" id="link">{{song['track']['name']}}</a></td>
+
+	 <td>{{song['track']['album']['name']}}</td>
+
+	 <td><a href="{{song['track']['artists'][0]['external_urls']['spotify']}}" id="link">{{song['track']['artists'][0]['name']}}</a></td>
+
+	 <td>{%  print("{0:.2f}".format(song['track']['duration_ms']/60000)) %}</td>
+
+	 <td>
+		 {% print(song['played_at'][11:19]) %}
+		 <br>
+		 {% print(song['played_at'][:10]) %}
+	 </td>
+
+	 <td><img src="{{song['track']['album']['images'][0]['url']}}"  style="width:80%; height:auto; padding:10px;"></td>
+	</tr>
+	{% endfor %}
+	<tbody>
+  </table>
+ </div>
+
+
+  <br><br><br><br>
+  <span id="textt">Most Played</span>
+  <br><br>
+  </div>
+
+  <div id=table2>
+	  coming soon
+  </div>
+
+
+  <br><br><br><br>
+  <div id="creds">
+	  Learning API's using Spotify API <span>&#8226;</span> Project by Shantanu Singh
+  </div>
+
+
+
+{% endblock %}
