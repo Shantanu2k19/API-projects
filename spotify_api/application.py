@@ -57,12 +57,12 @@ def index():
     import requests
     import json
     
+    if session.get('token') is None:
+    	print('No session found, generating token')
+    	generateToken()
 
-    #generateToken()
-   ####   GETTING USER DATA ####
-    
     if(not checkKey(session['token'])):
-        token = generateToken()
+        generateToken()
         print('token generated after checking')
 
 
@@ -85,8 +85,19 @@ def index():
     #print(res)
 
     
-    #### GETTING TOP ARTISTS 
-    return render_template("index.html", res=res) 
+    #### GETTING USER DETAILS
+    url = "https://api.spotify.com/v1/me"
+    payload={}
+    headers = {
+    'Authorization': session['token'],
+    'Cookie': 'sp_t=c619b1d8cf10a0d45638c388bbf6ce3b; sp_landing=https%3A%2F%2Fopen.spotify.com%2Fartist%2F3z97WMRi731dCvKklIf2X6'
+    }
+    response = requests.request("GET", url, headers=headers, data=payload)
+    det = response.json()
+    #print(det)
+
+
+    return render_template("index.html", res=res,det=det) 
 
 
 @app.route("/hello")

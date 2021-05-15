@@ -7,14 +7,16 @@
 
   <div class="top">
 		<p>
-		<a href="https://open.spotify.com/user/yub9xyg7b4zztflpdk52tqzsb"><img src="https://i.scdn.co/image/ab6775700000ee85f3182bf7999bbfcf5bb0b509" alt="USER IMAGE" id='usrr'></a>
+		  <a href="{{ det['external_urls']['spotify']}}"><img src="{{ det['images'][0]['url']}}" alt="Avatar" class="usrr"></a>
 		  <br>
 		  <br>
 		  PROFILE
 		  <br>
-		  <span style="font-size:60px; font-weight: bold; color: white;">zodiac</span> 
+		  <span style="font-size:60px; font-weight: bold; color: white;">{{det['display_name']}}</span> 
 		  <br>
-		  4 Public Playlists <span>&#8226;</span> 1 Follwer <span>&#8226;</span> 9 Following
+		  <span>&#8226;</span> {{det['followers']['total']}} Follwer 
+		  <br>
+		  {{det['email']}}
 		  <br>
 		  Last online : {% print(res['items'][0]['played_at'][11:16])  %},
 		  {% print(res['items'][0]['played_at'][:10]) %} 
